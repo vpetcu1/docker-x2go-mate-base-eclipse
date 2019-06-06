@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM vpetcu1/x2go-mate-base
 MAINTAINER Vasilica Petcu <vpetcu1@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 
