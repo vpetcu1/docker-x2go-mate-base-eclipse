@@ -3,6 +3,7 @@ MAINTAINER Vasilica Petcu <vpetcu1@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 
 ARG GRAAL_VERSION=1.0.0-rc16
+#ARG GRAAL_VERSION=19.0.0
 
 USER root
 
@@ -20,8 +21,9 @@ RUN ln -s /opt/apache-maven-3.6.0 /opt/maven
 
 #install graalvm
 RUN wget https://github.com/oracle/graal/releases/download/vm-$GRAAL_VERSION/graalvm-ce-$GRAAL_VERSION-linux-amd64.tar.gz -P /tmp
+#RUN wget https://github.com/oracle/graal/releases/download/vm-$GRAAL_VERSION/graalvm-ce-linux-amd64-$GRAAL_VERSION.tar.gz -P /tmp
 RUN tar xf /tmp/graalvm-ce-*.tar.gz -C /opt
-RUN ln -s /opt/graalvm-ce-1.0.0-rc16 /opt/graalvm
+RUN ln -s /opt/graalvm-ce-$GRAAL_VERSION /opt/graalvm
 
 
 # install eclipse
@@ -56,5 +58,6 @@ COPY ["eclipse_preferences.epf", "/"]
 RUN cp /set_env.sh /etc/profile.d/set_env.sh
 RUN chmod +x /*.sh
 
+RUN sh /x2go-mate-base-eclipse-entrypoint.sh
 EXPOSE 22
-ENTRYPOINT ["/x2go-mate-base-eclipse-entrypoint.sh"]
+ENTRYPOINT ["/start-supervisor.sh"]
