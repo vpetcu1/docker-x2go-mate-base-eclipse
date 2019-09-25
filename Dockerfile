@@ -3,6 +3,7 @@ MAINTAINER Vasilica Petcu <vpetcu1@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 
 ARG GRAAL_VERSION=1.0.0-rc16
+ARG MAVEN_VERSION=3.6.0
 #ARG GRAAL_VERSION=19.0.0
 
 USER root
@@ -14,9 +15,9 @@ RUN apt-get update && apt-get install wget -y
 RUN apt-get install default-jdk -y
 
 # install maven
-RUN wget https://www-us.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz -P /tmp
+RUN wget https://www-us.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz -P /tmp
 RUN tar xf /tmp/apache-maven-*.tar.gz -C /opt
-RUN ln -s /opt/apache-maven-3.6.0 /opt/maven
+RUN ln -s /opt/apache-maven-$MAVEN_VERSION /opt/maven
 
 
 #install graalvm
